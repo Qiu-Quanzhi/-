@@ -19,10 +19,8 @@ jobs:
     steps:
       - name: 工作流签出
         uses: actions/checkout@v4
-      # - name: 目录检查
-      #   shell: bash
-      #   run: |
-      #     mv unpackage/dist/build/web build/HistoryMap
+      - name: 工作流预备
+        run: mv unpackage/dist/build/web build/HistoryMap
       - name: 页面初始化
         uses: actions/configure-pages@v5
       - name: 页面上传
