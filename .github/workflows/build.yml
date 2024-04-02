@@ -28,7 +28,7 @@ jobs:
       - name: 页面上传
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './unpackage/dist/build/web/'
+          path: './build/'
       - name: 页面上线
         id: deployment
         uses: actions/deploy-pages@v4
