@@ -20,7 +20,9 @@ jobs:
       - name: 工作流签出
         uses: actions/checkout@v4
       - name: 工作流预备
-        run: mv unpackage/dist/build/web build/HistoryMap
+        run: |
+          ls
+          mv ./unpackage/dist/build/web ./build/HistoryMap
       - name: 页面初始化
         uses: actions/configure-pages@v5
       - name: 页面上传
