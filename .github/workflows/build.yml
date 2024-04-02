@@ -23,6 +23,7 @@ jobs:
         run: |
           mkdir build
           mv unpackage/dist/build/web/ build/HistoryMap
+          curl -o build/HistoryMap/404.html https://www.qqzhi.cc/404.html
       - name: 页面初始化
         uses: actions/configure-pages@v5
       - name: 页面上传
