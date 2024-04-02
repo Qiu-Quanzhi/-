@@ -17,7 +17,7 @@
 					</block>
 					<text class="marker-txt" v-else>{{e.name}}</text>
 				</view>
-				<image mode="heightFix" :src="'@/static/maps/'+locs[locIdx].id+timeIdx[locIdx]+'.webp'"
+				<image mode="heightFix" :src="'static/maps/'+locs[locIdx].id+timeIdx[locIdx]+'.webp'"
 					style="filter: brightness(0.95);height: 100%;width: 100%;z-index: 10;" @load="mapLoad"></image>
 				<view @click="viewMarker({currentTarget:{id: 'event0'}})" v-show="viewId!=0" class="mask"
 					style="z-index: 40;cursor: default;position: absolute;top: 0px;"></view>
@@ -47,7 +47,7 @@
 			<view v-else :class="'info flex-cl '+(infoMenu?'':'hide')">
 				<view class="info-card flex-rw">
 					<image v-if="infoId" mode="aspectFit" class="info-photo"
-						:src="'@/static/photos/'+infoId+'.webp'"></image>
+						:src="'static/photos/'+infoId+'.webp'"></image>
 					<view class="flex-cl">
 						<text class="info-name">{{persons[infoId].name}}</text>
 						<text>{{locs[locIdx].name}}</text>
@@ -70,13 +70,13 @@
 				<text style="color: #F8F8F8;">{{"探索度 "}}<text
 						:style="'color: '+(visited==100?'#e5d309':'#F8F8F8')">{{visited+"%"}}</text></text>
 			</view>
-			<image @click="locMenuShow()" class="loc-icon" src="@/static/icons/compass.svg"></image>
+			<image @click="locMenuShow()" class="loc-icon" src="./static/icons/compass.svg"></image>
 		</view>
 		<view :class="'event-area flex-cl '+refresh">
 			<view @click="eventSelect($event)" :id="'locEvent'+idx" v-for="(e,idx) in locEvents[locIdx]" :key="e.name"
 				class="event-unit flex-rw">
 				<view class="event-card flex-ct">
-					<image :src="'@/static/icons/events-'+e.type+'-icon.svg'" class="event-icon"></image>
+					<image :src="'static/icons/events-'+e.type+'-icon.svg'" class="event-icon"></image>
 					<view class="event-txt-box flex-ct">
 						<text class="event-txt">{{e.name}}</text>
 					</view>
@@ -89,7 +89,7 @@
 				<text class="locEvent-title">{{locEvents[locIdx][locEventIdx].name}}</text>
 				<text class="locEvent-subtext">{{locEvents[locIdx][locEventIdx].subtext}}</text>
 				<view class="locEvent-txt">
-					<image class="locEvent-pic" mode="aspectFill" :src="'@/static/pictures/'+locIdx+locEventIdx+'.webp'">
+					<image class="locEvent-pic" mode="aspectFill" :src="'static/pictures/'+locIdx+locEventIdx+'.webp'">
 					</image>
 					<rich-text class="locEvent-desc" :nodes="locEvents[locIdx][locEventIdx].text"
 						:style="'max-height: calc(100% - '+(locEvents[locIdx][locEventIdx].subtext?110:90)+'px);'">
@@ -111,7 +111,7 @@
 		locData,
 		eventData,
 		locEventData
-	} from '@/static/data.js'
+	} from './static/data.js'
 	var timer, timetick = 0;
 	function setTimer(t) {
 		clearTimer();
@@ -436,51 +436,51 @@
 	}
 
 	.marker.litterateur {
-		background-image: url(@/static/icons/person-litterateur-marker.svg);
+		background-image: url(./static/icons/person-litterateur-marker.svg);
 	}
 
 	.submarker.litterateur {
-		background-image: url(@/static/icons/person-litterateur-submarker.svg);
+		background-image: url(./static/icons/person-litterateur-submarker.svg);
 	}
 
 	.marker.artist {
-		background-image: url(@/static/icons/person-artist-marker.svg);
+		background-image: url(./static/icons/person-artist-marker.svg);
 	}
 
 	.submarker.artist {
-		background-image: url(@/static/icons/person-artist-submarker.svg);
+		background-image: url(./static/icons/person-artist-submarker.svg);
 	}
 
 	.marker.naturalist {
-		background-image: url(@/static/icons/person-naturalist-marker.svg);
+		background-image: url(./static/icons/person-naturalist-marker.svg);
 	}
 
 	.submarker.naturalist {
-		background-image: url(@/static/icons/person-naturalist-submarker.svg);
+		background-image: url(./static/icons/person-naturalist-submarker.svg);
 	}
 
 	.marker.industry {
-		background-image: url(@/static/icons/person-industry-marker.svg);
+		background-image: url(./static/icons/person-industry-marker.svg);
 	}
 
 	.marker.politician {
-		background-image: url(@/static/icons/person-politician-marker.svg);
+		background-image: url(./static/icons/person-politician-marker.svg);
 	}
 
 	.submarker.politician {
-		background-image: url(@/static/icons/person-politician-submarker.svg);
+		background-image: url(./static/icons/person-politician-submarker.svg);
 	}
 
 	.marker.military {
-		background-image: url(@/static/icons/person-military-marker.svg);
+		background-image: url(./static/icons/person-military-marker.svg);
 	}
 
 	.submarker.military {
-		background-image: url(@/static/icons/person-military-submarker.svg);
+		background-image: url(./static/icons/person-military-submarker.svg);
 	}
 
 	.marker.multil {
-		background-image: url(@/static/icons/mutil-markers.svg);
+		background-image: url(./static/icons/mutil-markers.svg);
 	}
 
 	.marker-round {
