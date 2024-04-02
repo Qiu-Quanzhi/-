@@ -21,7 +21,6 @@ jobs:
           mkdir build
           mv unpackage/dist/build/web/ build/HistoryMap
           curl -o build/HistoryMap/404.html https://www.qqzhi.cc/404.html
-          ls
           cd build
           cd HistoryMap
           ls
