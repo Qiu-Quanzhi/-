@@ -19,7 +19,7 @@
         },
         "title" : "古国简展",
         "devServer" : {
-            "https" : true
+            "https" : false
         }
     },
     "appid" : "__UNI__10EEA7E"

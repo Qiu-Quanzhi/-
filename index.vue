@@ -17,7 +17,7 @@
 					</block>
 					<text class="marker-txt" v-else>{{e.name}}</text>
 				</view>
-				<image mode="heightFix" :src="'static/maps/'+locs[locIdx].id+timeIdx[locIdx]+'.webp'"
+				<image mode="widthFix" :src="'static/maps/'+locs[locIdx].id+timeIdx[locIdx]+'.webp'"
 					style="filter: brightness(0.95);height: 100%;width: 100%;z-index: 10;" @load="mapLoad"></image>
 				<view @click="viewMarker({currentTarget:{id: 'event0'}})" v-show="viewId!=0" class="mask"
 					style="z-index: 40;cursor: default;position: absolute;top: 0px;"></view>
@@ -46,8 +46,8 @@
 			</view>
 			<view v-else :class="'info flex-cl '+(infoMenu?'':'hide')">
 				<view class="info-card flex-rw">
-					<image v-if="infoId" mode="aspectFit" class="info-photo"
-						:src="'static/photos/'+infoId+'.webp'"></image>
+					<image v-if="infoId" mode="aspectFit" class="info-photo" :src="'static/photos/'+infoId+'.webp'">
+					</image>
 					<view class="flex-cl">
 						<text class="info-name">{{persons[infoId].name}}</text>
 						<text>{{locs[locIdx].name}}</text>
@@ -58,12 +58,11 @@
 				<rich-text class="info-txt" :nodes="persons[infoId].desc"></rich-text>
 			</view>
 		</view>
-		<view :class="'toolbar '+refresh" v-show="!locMenu&&!infoMenu">
+		<!-- <view :class="'toolbar '+refresh" v-show="!locMenu&&!infoMenu">
 			<view class="toolbar-item flex-ct" @click="feedback">
-				
 				<text class="toolbar-txt">反馈建议</text>
 			</view>
-		</view>
+		</view> -->
 		<view class="loc-info flex-rw" v-show="!locMenu&&!infoMenu">
 			<view :class="'cl-gp flex-cl '+(locEvent?'hide ':'')+refresh" style="margin-right: 15px;transition: 0.25s;">
 				<text style="color: #FFFFFF;width: 100%;text-align: right;font-size: 20px;">{{locs[locIdx].name}}</text>
@@ -113,10 +112,12 @@
 		locEventData
 	} from './static/data.js'
 	var timer, timetick = 0;
+
 	function setTimer(t) {
 		clearTimer();
 		timer = setInterval(() => timetick += 50, 50);
 	}
+
 	function clearTimer() {
 		clearTimeout(timer);
 		timetick = 0;
@@ -136,13 +137,6 @@
 			visitedE = uni.getStorageSync("visitedE") ? uni.getStorageSync("visitedE") : visitedE
 			visitedP = uni.getStorageSync("visitedP") ? uni.getStorageSync("visitedP") : visitedP
 			this.exploreCalc()
-			this.windowResizeCallback({
-				size: {
-					windowHeight: uni.getWindowInfo().windowHeight,
-					windowWidth: uni.getWindowInfo().windowWidth
-				}
-			})
-			uni.onWindowResize(this.windowResizeCallback)
 		},
 		data() {
 			return {
@@ -154,7 +148,6 @@
 				visited: 0,
 				locMenu: false,
 				locEvent: false,
-				mapmode: "a",
 				locEventIdx: "0",
 				subMarkers: 'hide',
 				bgc: '#FFF',
@@ -282,12 +275,6 @@
 				clearTimer()
 				uni.setStorageSync("locIdx", this.locIdx)
 				uni.setStorageSync("timeIdx", this.timeIdx)
-			},
-			windowResizeCallback(res) {
-				if (res.size.windowWidth / res.size.windowHeight <= 1440 / 781)
-					this.mapmode = "a"
-				else
-					this.mapmode = "b"
 			}
 		}
 	}
@@ -323,16 +310,20 @@
 		color: #484848EE;
 		font-weight: 50;
 	}
+
 	.locEvent-desc {
 		line-height: 1.7em;
 	}
+
 	.locEvent-txt::-webkit-scrollbar {
 		width: 5px;
 	}
+
 	.locEvent-txt::-webkit-scrollbar-thumb {
 		border-radius: 10px;
 		box-shadow: inset 0 0 5px rgba(200, 200, 200, 0.8);
 	}
+
 	.locEvent-pic {
 		margin: 5px;
 		width: 110px;
@@ -341,17 +332,20 @@
 		float: left;
 		/* margin-right: 10px; */
 	}
+
 	.locEvent-txt {
 		width: calc(100% - 30px);
 		margin: 15px;
 		overflow-y: auto;
 		margin-top: 5px;
 	}
+
 	.locEvent-title {
 		font-size: 20px;
 		margin: 15px;
 		margin-bottom: 5px;
 	}
+
 	.locEvent {
 		background-color: #FFFFFFDD;
 		width: 650px;
@@ -361,6 +355,7 @@
 		border-radius: 10px;
 		justify-content: flex-start;
 	}
+
 	.locEvent-area {
 		position: absolute;
 		top: 0px;
@@ -370,13 +365,16 @@
 		z-index: 150;
 		transition: opacity 0.25s;
 	}
+
 	.event-icon {
 		height: 40px;
 		width: 40px;
 	}
+
 	.event-txt-box {
 		height: 40px;
 	}
+
 	.event-cardend {
 		margin-top: 12.5px;
 		width: 0px;
@@ -385,6 +383,7 @@
 		border-left: 15px solid #FFFFFF60;
 		cursor: pointer;
 	}
+
 	.event-card {
 		margin-top: 12.5px;
 		background-color: #FFFFFF60;
@@ -394,34 +393,42 @@
 		justify-content: flex-start;
 		cursor: pointer;
 	}
+
 	.event-unit {
 		transition: 0.25s;
 	}
+
 	.event-unit:hover {
 		transform: scale(1.05);
 	}
+
 	.event-area {
 		position: absolute;
 		left: 0px;
 		top: 0px;
 		transition: 0.25s;
 	}
+
 	.info-txt {
 		max-height: calc(100% - 170px);
 		overflow-y: auto;
 	}
+
 	.info-txt::-webkit-scrollbar {
 		width: 5px;
 	}
+
 	.info-txt::-webkit-scrollbar-thumb {
 		border-radius: 10px;
 		box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.8);
 	}
+
 	.info-photo {
 		height: 108px;
 		width: 90px;
 		margin-right: 20px;
 	}
+
 	.info-card {
 		margin-top: 20px;
 		padding: 10px;
@@ -643,34 +650,44 @@
 		background-color: #FFF;
 	}
 
-	.map-area.a {
-		left: calc((100vw - (100vh * 1440 / 781)));
-		height: 100vh;
-		width: calc(2 * (100vh * 1440 / 781) - 100vw);
+	@media (max-aspect-ratio: 1440 / 781) {
+		.map {
+			left: calc(((100vh * 1440 / 781) - 100vw) / 2);
+			height: 100vh;
+			width: calc(100vh * 1440 / 781);
+		}
+
+		.map-area {
+			left: calc((100vw - (100vh * 1440 / 781)));
+			height: 100vh;
+			width: calc(2 * (100vh * 1440 / 781) - 100vw);
+		}
+
 	}
 
-	.map-area.b {
-		top: calc((100vh - (100vw / 1440 * 781)));
-		width: 100vw;
-		height: calc(2 * (100vw / 1440 * 781) - 100vh);
+	@media (min-aspect-ratio: 1440 / 781) {
+		.map {
+			top: calc(((100vw / 1440 * 781) - 100vh) / 2);
+			width: 100vw;
+			height: calc(100vw / 1440 * 781);
+		}
+
+		.map-area {
+			top: calc((100vh - (100vw / 1440 * 781)));
+			width: 100vw;
+			height: calc(2 * (100vw / 1440 * 781) - 100vh);
+		}
+
 	}
+
 
 	.map {
 		position: absolute;
 		transition: 0.25s;
 	}
 
-	.map.a {
-		left: calc(((100vh * 1440 / 781) - 100vw) / 2);
-		height: 100vh;
-		width: calc(100vh * 1440 / 781);
-	}
 
-	.map.b {
-		top: calc(((100vw / 1440 * 781) - 100vh) / 2);
-		width: 100vw;
-		height: calc(100vw / 1440 * 781);
-	}
+
 
 	.time-info {
 		position: absolute;
